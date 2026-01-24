@@ -1,127 +1,113 @@
 # MeekoCoin ($MEEKO)
 
-A meme cryptocurrency on Solana inspired by Meeko the cat.
+<p align="center">
+  <img src="token/assets/meekocoin-logo.png" alt="MeekoCoin" width="200">
+</p>
 
-**No utility, just vibes.**
+<p align="center">
+  <strong>Smol but fierce. 420.69M tokens of pure grr.</strong>
+</p>
 
-## Token Details
+<p align="center">
+  <a href="https://solscan.io/token/9AqPGi9n7unEA8C6T6ujHxXsg1ywb1Ro6fitw9daMGNa">Solscan</a> •
+  <a href="https://dexscreener.com/solana/9AqPGi9n7unEA8C6T6ujHxXsg1ywb1Ro6fitw9daMGNa">DEXScreener</a> •
+  <a href="https://jup.ag/swap/SOL-9AqPGi9n7unEA8C6T6ujHxXsg1ywb1Ro6fitw9daMGNa">Trade on Jupiter</a>
+</p>
 
-- **Name**: MeekoCoin
-- **Symbol**: MEEKO
-- **Blockchain**: Solana (SPL Token)
-- **Total Supply**: 420,690,000 (420.69 million)
-- **Decimals**: 9
-- **Tax**: 0%
-- **Mint Authority**: Revoked (fixed supply forever)
+---
 
-## Project Structure
+## Contract Address
+
+```
+9AqPGi9n7unEA8C6T6ujHxXsg1ywb1Ro6fitw9daMGNa
+```
+
+## About Meeko
+
+Meeko thinks he's a big strong man, but he's actually just a little fry. He'll chase his toy like he's hunting the next 100x, growl under the bed like a whale defending support, and lick plastic bags because... well, that's just Meeko.
+
+Scared of doorbells, fearless in the charts. Fixed supply, no rugs, just a little guy pretending to be huge.
+
+**HODL like Meeko HODLs his favorite crinkly bag.**
+
+## Tokenomics
+
+| Property | Value |
+|----------|-------|
+| **Name** | MeekoCoin |
+| **Symbol** | MEEKO |
+| **Blockchain** | Solana |
+| **Total Supply** | 420,690,000 |
+| **Decimals** | 9 |
+| **Tax** | 0% |
+| **Mint Authority** | Revoked |
+| **Freeze Authority** | Revoked |
+
+100% of supply added to liquidity. No team tokens. No presale. Fair launch.
+
+## Verified Safe
+
+- ✅ Mint authority revoked (fixed supply forever)
+- ✅ Freeze authority revoked (can't freeze wallets)
+- ✅ No buy/sell tax
+- ✅ Open source code
+
+---
+
+## For Developers
+
+Want to create your own memecoin? This repo contains everything you need.
+
+### Project Structure
 
 ```
 meekocoin/
-├── token/           # Solana token creation scripts
-│   ├── src/
-│   │   ├── config.ts
-│   │   ├── create-token.ts
-│   │   ├── mint-tokens.ts
-│   │   └── revoke-authority.ts
-│   └── assets/
-│       └── meekocoin-logo.png  # Add your 512x512 logo here
+├── token/           # Solana token scripts
+│   └── src/
+│       ├── config.ts          # Token configuration
+│       ├── create-token.ts    # Create token + metadata
+│       ├── mint-tokens.ts     # Mint supply
+│       ├── revoke-authority.ts # Revoke mint authority
+│       ├── revoke-freeze.ts   # Revoke freeze authority
+│       └── update-metadata.ts # Update logo/description
 │
 └── web/             # Next.js landing page
     ├── app/
     └── components/
 ```
 
-## Prerequisites
-
-- Node.js 18+
-- Solana CLI (`sh -c "$(curl -sSfL https://release.solana.com/stable/install)"`)
-- A funded Solana wallet
-
-## Quick Start
-
-### 1. Install Dependencies
+### Quick Start
 
 ```bash
+# Install dependencies
 npm install
-```
 
-### 2. Set Up Solana
-
-```bash
-# Install Solana CLI (if not installed)
-sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
-
-# Create a new keypair
+# Set up Solana CLI
 solana-keygen new
-
-# Set to devnet for testing
 solana config set --url devnet
-
-# Get test SOL
 solana airdrop 2
+
+# Create token (devnet)
+NETWORK=devnet npm run token:create
+NETWORK=devnet npm run token:mint
+NETWORK=devnet npm run token:revoke
+
+# Run website
+npm run web:dev
 ```
 
-### 3. Add Your Logo
-
-Place a 512x512 PNG image at `token/assets/meekocoin-logo.png`
-
-### 4. Create Token (Devnet)
+### Mainnet Deployment
 
 ```bash
-cd token
-npm install
-NETWORK=devnet npm run create
+solana config set --url mainnet-beta
+NETWORK=mainnet npm run token:create
+NETWORK=mainnet npm run token:mint
+NETWORK=mainnet npm run token:revoke
 ```
 
-### 5. Mint Tokens
+Cost: ~0.05 SOL for token creation + whatever you add for liquidity.
 
-```bash
-NETWORK=devnet npm run mint
-```
-
-### 6. Revoke Mint Authority (IRREVERSIBLE)
-
-```bash
-NETWORK=devnet npm run revoke
-```
-
-### 7. Run Website Locally
-
-```bash
-cd web
-npm install
-npm run dev
-```
-
-Open http://localhost:3000
-
-## Mainnet Deployment
-
-1. Ensure you have ~0.05 SOL in your wallet
-2. Switch to mainnet: `solana config set --url mainnet-beta`
-3. Run creation scripts with `NETWORK=mainnet`
-4. Update the contract address in `web/components/ContractAddress.tsx`
-5. Deploy website to Vercel
-
-## Website Customization
-
-### Update Contract Address
-
-Edit `web/components/ContractAddress.tsx`:
-
-```typescript
-const CONTRACT_ADDRESS = "YOUR_ACTUAL_TOKEN_ADDRESS";
-```
-
-### Add Meeko Images
-
-- Hero image: Place in `web/public/meeko-hero.png`
-- Update `web/components/Hero.tsx` to use the image
-
-### Update Social Links
-
-Edit the links in `web/components/Hero.tsx` and `web/components/Footer.tsx`
+---
 
 ## Disclaimer
 
