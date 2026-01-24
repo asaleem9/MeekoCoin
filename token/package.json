@@ -1,0 +1,25 @@
+{
+  "name": "meekocoin-token",
+  "version": "1.0.0",
+  "description": "MeekoCoin Solana token creation scripts",
+  "type": "module",
+  "scripts": {
+    "create": "npx tsx src/create-token.ts",
+    "mint": "npx tsx src/mint-tokens.ts",
+    "revoke": "npx tsx src/revoke-authority.ts",
+    "update": "npx tsx src/update-metadata.ts",
+    "revoke-freeze": "npx tsx src/revoke-freeze.ts"
+  },
+  "dependencies": {
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/mpl-toolbox": "^0.9.4",
+    "@metaplex-foundation/umi": "^0.9.2",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.9.2",
+    "@metaplex-foundation/umi-uploader-irys": "^0.9.2",
+    "@solana/web3.js": "^1.95.4"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

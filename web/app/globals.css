@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --meeko-orange: #FF6B35;
+  --meeko-cream: #FFF8F0;
+  --meeko-brown: #8B4513;
+  --meeko-gold: #FFD700;
+  --meeko-dark: #1a1a2e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+  color: white;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--meeko-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--meeko-orange);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff8555;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--meeko-orange) 0%, var(--meeko-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effects */
+.glow-orange {
+  box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+}
+
+.glow-gold {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+/* Card styling */
+.card {
+  @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl;
+}
+
+.card:hover {
+  @apply border-meeko-orange/30;
+}
+
+/* Button styling */
+.btn-primary {
+  @apply bg-gradient-to-r from-meeko-orange to-orange-500 text-white font-bold py-3 px-8 rounded-full;
+  @apply hover:from-orange-500 hover:to-meeko-orange transition-all duration-300;
+  @apply shadow-lg hover:shadow-meeko-orange/30;
+}
+
+/* Section padding */
+.section {
+  @apply py-20 px-4 md:px-8;
+}
+
+/* Container */
+.container-custom {
+  @apply max-w-6xl mx-auto;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "meekocoin",
+  "version": "1.0.0",
+  "description": "MeekoCoin - A meme cryptocurrency on Solana inspired by Meeko the cat",
+  "private": true,
+  "workspaces": [
+    "token",
+    "web"
+  ],
+  "scripts": {
+    "token:create": "npm run create --workspace=token",
+    "token:mint": "npm run mint --workspace=token",
+    "token:revoke": "npm run revoke --workspace=token",
+    "web:dev": "npm run dev --workspace=web",
+    "web:build": "npm run build --workspace=web"
+  },
+  "keywords": ["solana", "memecoin", "meeko", "cryptocurrency"],
+  "license": "MIT"
+}

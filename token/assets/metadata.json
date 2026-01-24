@@ -1,0 +1,26 @@
+{
+  "name": "MeekoCoin",
+  "symbol": "MEEKO",
+  "description": "The official memecoin of Meeko the cat. No utility, just vibes.",
+  "image": "REPLACE_WITH_ARWEAVE_URL",
+  "external_url": "https://meekocoin.com",
+  "attributes": [
+    {
+      "trait_type": "Category",
+      "value": "Memecoin"
+    },
+    {
+      "trait_type": "Blockchain",
+      "value": "Solana"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "REPLACE_WITH_ARWEAVE_URL",
+        "type": "image/png"
+      }
+    ],
+    "category": "image"
+  }
+}
