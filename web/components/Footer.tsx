@@ -49,7 +49,7 @@ export default function Footer() {
                 className="mt-4 p-4 bg-meeko-orange/10 border-l-4 border-meeko-orange"
               >
                 <p className="font-mono text-xs text-meeko-orange">
-                  *purrs* You found me! Meeko approves. grr grr
+                  *purrs* You found me! Meeko approves.
                 </p>
               </motion.div>
             )}
