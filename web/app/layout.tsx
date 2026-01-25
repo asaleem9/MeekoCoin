@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Bebas_Neue, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-bebas",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-ibm-mono",
+});
 
 export const metadata: Metadata = {
   title: "MeekoCoin | The Purrfect Memecoin on Solana",
@@ -27,8 +37,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${bebasNeue.variable} ${ibmPlexMono.variable}`}>
+      <body className="scanlines">
+        <div className="noise-overlay" aria-hidden="true" />
+        {children}
+      </body>
     </html>
   );
 }

@@ -4,10 +4,19 @@
 
 :root {
   --meeko-orange: #FF6B35;
-  --meeko-cream: #FFF8F0;
-  --meeko-brown: #8B4513;
   --meeko-gold: #FFD700;
-  --meeko-dark: #1a1a2e;
+  --meeko-black: #000000;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 html {
@@ -15,9 +24,42 @@ html {
 }
 
 body {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+  background: #000000;
   color: white;
   min-height: 100vh;
+  font-family: var(--font-ibm-mono), monospace;
+}
+
+/* Noise texture overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Scanline effect */
+.scanlines::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
 }
 
 /* Custom scrollbar */
@@ -26,12 +68,12 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--meeko-dark);
+  background: #000;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--meeko-orange);
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -46,37 +88,228 @@ body {
   background-clip: text;
 }
 
-/* Glow effects */
+/* Neon glow effects */
 .glow-orange {
-  box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+  box-shadow:
+    0 0 5px var(--meeko-orange),
+    0 0 20px rgba(255, 107, 53, 0.5),
+    0 0 40px rgba(255, 107, 53, 0.3);
 }
 
 .glow-gold {
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+  box-shadow:
+    0 0 5px var(--meeko-gold),
+    0 0 20px rgba(255, 215, 0, 0.5),
+    0 0 40px rgba(255, 215, 0, 0.3);
 }
 
-/* Card styling */
-.card {
-  @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl;
+.text-glow-orange {
+  text-shadow:
+    0 0 10px var(--meeko-orange),
+    0 0 30px rgba(255, 107, 53, 0.5),
+    0 0 60px rgba(255, 107, 53, 0.3);
 }
 
-.card:hover {
-  @apply border-meeko-orange/30;
+/* Brutalist card styling */
+.card-brutal {
+  @apply bg-black border-l-4 border-meeko-orange relative;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
 }
 
-/* Button styling */
-.btn-primary {
-  @apply bg-gradient-to-r from-meeko-orange to-orange-500 text-white font-bold py-3 px-8 rounded-full;
-  @apply hover:from-orange-500 hover:to-meeko-orange transition-all duration-300;
-  @apply shadow-lg hover:shadow-meeko-orange/30;
+.card-brutal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,107,53,0.05) 0%, transparent 50%);
+  pointer-events: none;
 }
 
-/* Section padding */
+/* Terminal styling */
+.terminal {
+  @apply bg-black border border-meeko-orange/50 font-mono;
+  box-shadow:
+    inset 0 0 50px rgba(255, 107, 53, 0.03),
+    0 0 20px rgba(255, 107, 53, 0.3);
+}
+
+.terminal::before {
+  content: "$ ";
+  @apply text-meeko-orange;
+}
+
+/* Breathing button */
+.btn-breathe {
+  @apply bg-meeko-orange text-black font-bold py-4 px-8 uppercase tracking-wider;
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.btn-breathe:hover {
+  animation-play-state: paused;
+  @apply bg-meeko-gold;
+}
+
+/* Ghost button */
+.btn-ghost {
+  @apply border-2 border-meeko-orange text-meeko-orange font-bold py-4 px-8 uppercase tracking-wider;
+  @apply hover:bg-meeko-orange hover:text-black transition-all duration-300;
+}
+
+/* Section styling */
 .section {
-  @apply py-20 px-4 md:px-8;
+  @apply py-20 px-4 md:px-8 relative;
 }
 
-/* Container */
 .container-custom {
   @apply max-w-6xl mx-auto;
+}
+
+/* Grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,107,53,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,107,53,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Glitch text layers */
+.glitch-wrapper {
+  position: relative;
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--meeko-orange);
+  clip-path: inset(44% 0 56% 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--meeko-gold);
+  clip-path: inset(60% 0 20% 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip-path: inset(40% 0 61% 0); }
+  20% { clip-path: inset(92% 0 1% 0); }
+  40% { clip-path: inset(43% 0 1% 0); }
+  60% { clip-path: inset(25% 0 58% 0); }
+  80% { clip-path: inset(54% 0 7% 0); }
+  100% { clip-path: inset(58% 0 43% 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip-path: inset(60% 0 10% 0); }
+  20% { clip-path: inset(17% 0 52% 0); }
+  40% { clip-path: inset(73% 0 8% 0); }
+  60% { clip-path: inset(5% 0 88% 0); }
+  80% { clip-path: inset(37% 0 43% 0); }
+  100% { clip-path: inset(82% 0 2% 0); }
+}
+
+/* Corner brackets for brutalist frames */
+.bracket-frame {
+  position: relative;
+}
+
+.bracket-frame::before,
+.bracket-frame::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--meeko-orange);
+}
+
+.bracket-frame::before {
+  top: -5px;
+  left: -5px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.bracket-frame::after {
+  bottom: -5px;
+  right: -5px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Horizontal scroll container */
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap-x > * {
+  scroll-snap-align: start;
+}
+
+/* Number breaking effect */
+.number-break {
+  @apply font-mono text-8xl md:text-9xl font-bold text-meeko-orange;
+  margin-left: -20px;
+  margin-right: -20px;
+  text-shadow:
+    0 0 20px rgba(255, 107, 53, 0.5),
+    0 0 40px rgba(255, 107, 53, 0.3);
+}
+
+/* Step number offset */
+.step-number {
+  @apply font-display text-9xl font-bold text-meeko-orange/10 absolute;
+  transform: translateX(-50%);
+}
+
+/* Pulsing live indicator */
+.live-indicator {
+  @apply flex items-center gap-2 text-sm font-mono uppercase tracking-wider;
+}
+
+.live-indicator::before {
+  content: "";
+  @apply w-2 h-2 bg-meeko-orange rounded-full;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Selection styling */
+::selection {
+  background: var(--meeko-orange);
+  color: black;
+}
+
+/* Focus styling */
+:focus-visible {
+  outline: 2px solid var(--meeko-orange);
+  outline-offset: 2px;
 }
