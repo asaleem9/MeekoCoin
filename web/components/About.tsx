@@ -7,12 +7,12 @@ const cards = [
   {
     icon: "[ * ]",
     title: "Plastic Bag Connoisseur",
-    description: "HODL like Meeko HODLs his favorite crinkly bag. Pure feral energy.",
+    description: "HODL like Meeko HODLs his favorite crinkly bag. Pure grr energy.",
   },
   {
     icon: "< ! >",
     title: "Smol But Fierce",
-    description: "420.69 million tokens. No rugs, just a little guy pretending to be huge.",
+    description: "420.69 million tokens of grr. No rugs, just a little guy pretending to be huge.",
   },
   {
     icon: "{ ~ }",
