@@ -54,8 +54,8 @@ function AnimatedNumber({ value }: { value: string }) {
 export default function Tokenomics() {
   return (
     <section className="section relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Background decoration - hidden on mobile to prevent overflow */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
         <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[20rem] font-display text-meeko-orange/[0.02] leading-none">
           420
         </div>
@@ -79,25 +79,22 @@ export default function Tokenomics() {
           </motion.div>
 
           {/* Stats grid with breaking numbers */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-16">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
                 variants={fadeInUp}
-                className="relative"
+                className="relative pl-3 md:pl-4"
               >
                 <div className="text-xs font-mono text-gray-600 uppercase tracking-widest mb-2">
                   {stat.label}
                 </div>
 
-                {/* Large breaking number */}
+                {/* Large number - smaller on mobile to prevent overflow */}
                 <div
-                  className={`font-mono text-4xl md:text-5xl lg:text-6xl font-bold text-meeko-orange ${
-                    index === 0 ? "text-glow-orange" : ""
+                  className={`font-mono text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-meeko-orange break-all ${
+                    index === 0 ? "md:text-glow-orange" : ""
                   }`}
-                  style={{
-                    marginLeft: index === 0 ? "-0.5rem" : 0,
-                  }}
                 >
                   <AnimatedNumber value={stat.value} />
                 </div>
@@ -107,7 +104,7 @@ export default function Tokenomics() {
                 </div>
 
                 {/* Vertical line decoration */}
-                <div className="absolute -left-4 top-0 bottom-0 w-px bg-meeko-orange/20" />
+                <div className="absolute left-0 top-0 bottom-0 w-px bg-meeko-orange/20" />
               </motion.div>
             ))}
           </div>
