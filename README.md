@@ -24,7 +24,7 @@
 
 ## About Meeko
 
-Meeko thinks he's a big strong man, but he's actually just a little fry. He'll chase his toy like he's hunting the next 100x, growl under the bed like a whale defending support, and lick plastic bags because... well, that's just Meeko.
+Meeko thinks he's a big strong man, but he's actually just a little fry. 
 
 Scared of doorbells, fearless in the charts. Fixed supply, no rugs, just a little guy pretending to be huge.
 
