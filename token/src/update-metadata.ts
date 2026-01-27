@@ -19,7 +19,7 @@ import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { readFileSync, existsSync } from "fs";
 import { TOKEN_CONFIG, KEYPAIR_PATH, getRpcUrl, NETWORK } from "./config.js";
 
-const NEW_DESCRIPTION = `Meeko thinks he's a big strong man, but he's actually just a little fry. 420.69 million tokens of pure grr energy. He'll chase his toy like he's hunting the next 100x, growl under the bed like a whale defending support, and lick plastic bags because... well, that's just Meeko. Scared of doorbells, fearless in the charts. Fixed supply, no rugs, just a little guy pretending to be huge. HODL like Meeko HODLs his favorite crinkly bag.`;
+const NEW_DESCRIPTION = `Meeko thinks he's a big strong man, but he's actually just a little fry. 420.69 million tokens of pure chaos energy. He'll chase his toy like he's hunting the next 100x, growl under the bed like a whale defending support, and lick plastic bags because... well, that's just Meeko. Scared of doorbells, fearless in the charts. Fixed supply, no rugs, just a little guy pretending to be huge. HODL like Meeko HODLs his favorite crinkly bag.`;
 
 async function main() {
   console.log("\n========================================");

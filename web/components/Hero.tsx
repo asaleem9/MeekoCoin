@@ -125,7 +125,7 @@ export default function Hero() {
               variants={fadeInUp}
               className="text-lg text-meeko-orange mb-8 font-mono"
             >
-              420.69M tokens of pure grr.
+              420.69M tokens of pure chaos.
             </motion.p>
 
             {/* CTA Buttons */}

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Smol but fierce. 420.69M tokens of pure grr.</strong>
+  <strong>Smol but fierce. 420.69M tokens of pure chaos.</strong>
 </p>
 
 <p align="center">
