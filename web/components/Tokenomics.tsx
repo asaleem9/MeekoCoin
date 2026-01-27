@@ -78,8 +78,8 @@ export default function Tokenomics() {
             </h2>
           </motion.div>
 
-          {/* Stats grid with breaking numbers */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-16">
+          {/* Stats grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -90,9 +90,9 @@ export default function Tokenomics() {
                   {stat.label}
                 </div>
 
-                {/* Large number - smaller on mobile to prevent overflow */}
+                {/* Number - sized to fit on one line */}
                 <div
-                  className={`font-mono text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-meeko-orange break-all ${
+                  className={`font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-meeko-orange whitespace-nowrap ${
                     index === 0 ? "md:text-glow-orange" : ""
                   }`}
                 >
