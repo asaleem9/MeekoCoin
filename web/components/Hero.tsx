@@ -136,7 +136,7 @@ export default function Hero() {
               <BreathingButton href="#how-to-buy" variant="primary">
                 BUY $MEEKO
               </BreathingButton>
-              <BreathingButton href="#contract" variant="ghost">
+              <BreathingButton href="#contract" variant="primary">
                 CONTRACT
               </BreathingButton>
             </motion.div>
