@@ -13,12 +13,13 @@ MeekoCoin is a Solana SPL memecoin with a Next.js landing page. The project uses
 ### Token Scripts (require Solana CLI + funded wallet)
 ```bash
 # Set network via environment variable
-NETWORK=devnet npm run token:create   # Create token with metadata on Arweave
-NETWORK=devnet npm run token:mint     # Mint full supply to deployer wallet
-NETWORK=devnet npm run token:revoke   # Permanently revoke mint authority (IRREVERSIBLE)
+NETWORK=devnet npm run token:create          # Create token with metadata on Arweave
+NETWORK=devnet npm run token:mint            # Mint full supply to deployer wallet
+NETWORK=devnet npm run token:revoke          # Permanently revoke mint authority (IRREVERSIBLE)
+NETWORK=devnet npm run token:revoke-freeze   # Permanently revoke freeze authority (IRREVERSIBLE)
 
-# Update metadata (logo/description) - run from token/ directory
-NETWORK=mainnet npm run update
+# Update metadata (logo/description)
+NETWORK=mainnet npm run token:update
 ```
 
 ### Web Development
@@ -39,6 +40,7 @@ npm install          # Installs both workspaces
 - **create-token.ts** - Uploads logo/metadata to Arweave via Irys, creates SPL token mint with Metaplex metadata
 - **mint-tokens.ts** - Mints entire supply to deployer wallet
 - **revoke-authority.ts** - Permanently disables minting (uses `mpl-toolbox` setAuthority)
+- **revoke-freeze.ts** - Permanently disables freezing wallets (uses `mpl-toolbox` setAuthority)
 - **update-metadata.ts** - Updates on-chain metadata (logo, description) without affecting supply
 
 All scripts read `NETWORK` env var (`devnet`|`mainnet`) and keypair from `~/.config/solana/id.json`.

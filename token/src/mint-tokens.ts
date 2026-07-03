@@ -10,13 +10,20 @@
 
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mintV1, mplTokenMetadata, TokenStandard } from "@metaplex-foundation/mpl-token-metadata";
+import { fetchMint } from "@metaplex-foundation/mpl-toolbox";
 import {
   createSignerFromKeypair,
   keypairIdentity,
   publicKey,
 } from "@metaplex-foundation/umi";
 import { readFileSync, existsSync } from "fs";
-import { TOKEN_CONFIG, KEYPAIR_PATH, getRpcUrl, NETWORK } from "./config.js";
+import {
+  TOKEN_CONFIG,
+  KEYPAIR_PATH,
+  MINT_ADDRESS_PATH,
+  getRpcUrl,
+  NETWORK,
+} from "./config.js";
 
 async function main() {
   console.log("\n========================================");
@@ -25,12 +32,11 @@ async function main() {
   console.log(`Network: ${NETWORK}`);
 
   // Get mint address
-  const mintAddressPath = "./mint-address.txt";
-  if (!existsSync(mintAddressPath)) {
+  if (!existsSync(MINT_ADDRESS_PATH)) {
     console.error("Mint address not found. Run create-token.ts first.");
     process.exit(1);
   }
-  const mintAddress = readFileSync(mintAddressPath, "utf-8").trim();
+  const mintAddress = readFileSync(MINT_ADDRESS_PATH, "utf-8").trim();
   console.log(`Mint Address: ${mintAddress}`);
 
   // Load keypair
@@ -48,6 +54,16 @@ async function main() {
   umi.use(keypairIdentity(signer));
 
   console.log(`Deployer: ${signer.publicKey}`);
+
+  // Refuse to mint twice — the full supply is minted in one shot
+  const mintAccount = await fetchMint(umi, publicKey(mintAddress));
+  if (mintAccount.supply > 0n) {
+    const minted = Number(mintAccount.supply) / 10 ** TOKEN_CONFIG.decimals;
+    console.error(`\nSupply already minted: ${minted.toLocaleString()} MEEKO.`);
+    console.error("Aborting to prevent double-minting.");
+    process.exit(1);
+  }
+
   console.log(`\nMinting ${TOKEN_CONFIG.totalSupplyDisplay} MEEKO tokens...`);
 
   // Mint full supply

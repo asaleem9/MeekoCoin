@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Player } from "@remotion/player";
 import dynamic from "next/dynamic";
@@ -17,23 +17,27 @@ const GlowOrb = dynamic(() => import("@/remotion/compositions/GlowOrb"), {
 });
 
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section className="min-h-screen flex items-center relative overflow-hidden grid-bg">
       {/* Remotion CoinShower Background */}
-      <div className="absolute inset-0 pointer-events-none opacity-60">
-        <Player
-          component={CoinShower}
-          durationInFrames={300}
-          fps={30}
-          compositionWidth={1920}
-          compositionHeight={1080}
-          loop
-          autoPlay
-          style={{ width: "100%", height: "100%" }}
-          controls={false}
-          acknowledgeRemotionLicense
-        />
-      </div>
+      {!reduceMotion && (
+        <div className="absolute inset-0 pointer-events-none opacity-60">
+          <Player
+            component={CoinShower}
+            durationInFrames={300}
+            fps={30}
+            compositionWidth={1920}
+            compositionHeight={1080}
+            loop
+            autoPlay
+            style={{ width: "100%", height: "100%" }}
+            controls={false}
+            acknowledgeRemotionLicense
+          />
+        </div>
+      )}
 
       {/* Grid lines decoration */}
       <div className="absolute inset-0 pointer-events-none">
@@ -52,24 +56,26 @@ export default function Hero() {
             className="relative order-2 md:order-1"
           >
             {/* GlowOrb behind coin */}
-            <div className="absolute inset-0 -m-16 pointer-events-none">
-              <Player
-                component={GlowOrb}
-                durationInFrames={60}
-                fps={30}
-                compositionWidth={500}
-                compositionHeight={500}
-                loop
-                autoPlay
-                style={{ width: "100%", height: "100%" }}
-                controls={false}
-                acknowledgeRemotionLicense
-              />
-            </div>
+            {!reduceMotion && (
+              <div className="absolute inset-0 -m-16 pointer-events-none">
+                <Player
+                  component={GlowOrb}
+                  durationInFrames={60}
+                  fps={30}
+                  compositionWidth={500}
+                  compositionHeight={500}
+                  loop
+                  autoPlay
+                  style={{ width: "100%", height: "100%" }}
+                  controls={false}
+                  acknowledgeRemotionLicense
+                />
+              </div>
+            )}
 
             {/* Floating coin */}
             <motion.div
-              animate={{ y: [0, -15, 0] }}
+              animate={reduceMotion ? undefined : { y: [0, -15, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="relative z-10"
             >
@@ -133,10 +139,10 @@ export default function Hero() {
               variants={fadeInUp}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <BreathingButton href="#how-to-buy" variant="primary">
+              <BreathingButton href="#how-to-buy">
                 BUY $MEEKO
               </BreathingButton>
-              <BreathingButton href="#contract" variant="primary">
+              <BreathingButton href="#contract">
                 CONTRACT
               </BreathingButton>
             </motion.div>
@@ -146,7 +152,7 @@ export default function Hero() {
 
       {/* Scroll indicator - hidden on mobile to avoid overlap with $MEEKO */}
       <motion.div
-        animate={{ y: [0, 10, 0] }}
+        animate={reduceMotion ? undefined : { y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex"
       >

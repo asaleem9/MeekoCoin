@@ -18,22 +18,8 @@ import {
 } from "@metaplex-foundation/umi";
 import { setAuthority, AuthorityType } from "@metaplex-foundation/mpl-toolbox";
 import { readFileSync, existsSync } from "fs";
-import { KEYPAIR_PATH, getRpcUrl, NETWORK } from "./config.js";
-import * as readline from "readline";
-
-async function confirm(question: string): Promise<boolean> {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  return new Promise((resolve) => {
-    rl.question(question, (answer) => {
-      rl.close();
-      resolve(answer.toLowerCase() === "yes");
-    });
-  });
-}
+import { KEYPAIR_PATH, MINT_ADDRESS_PATH, getRpcUrl, NETWORK } from "./config.js";
+import { confirm } from "./confirm.js";
 
 async function main() {
   console.log("\n========================================");
@@ -46,12 +32,11 @@ async function main() {
   console.log(`Network: ${NETWORK}`);
 
   // Get mint address
-  const mintAddressPath = "./mint-address.txt";
-  if (!existsSync(mintAddressPath)) {
+  if (!existsSync(MINT_ADDRESS_PATH)) {
     console.error("Mint address not found. Run create-token.ts first.");
     process.exit(1);
   }
-  const mintAddress = readFileSync(mintAddressPath, "utf-8").trim();
+  const mintAddress = readFileSync(MINT_ADDRESS_PATH, "utf-8").trim();
   console.log(`Mint Address: ${mintAddress}`);
 
   // Load keypair

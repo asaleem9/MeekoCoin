@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    domains: ['arweave.net'],
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;

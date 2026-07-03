@@ -31,10 +31,10 @@ yarn-error.log*
 # Solana keypairs (NEVER commit these!)
 *.json
 !package.json
+!package-lock.json
 !tsconfig.json
 !postcss.config.js
 !next.config.js
-!token/assets/metadata.json
 
 # Token deployment artifacts
 token/mint-address.txt

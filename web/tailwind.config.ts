@@ -82,7 +82,6 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        "noise": "url('/noise.png')",
         "grid": "linear-gradient(rgba(255,107,53,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,107,53,0.03) 1px, transparent 1px)",
       },
       backgroundSize: {

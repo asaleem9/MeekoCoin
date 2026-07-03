@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp } from "@/lib/animations";
+import { CONTRACT_ADDRESS } from "@/lib/constants";
 
-const CONTRACT_ADDRESS = "9AqPGi9n7unEA8C6T6ujHxXsg1ywb1Ro6fitw9daMGNa";
+type CopyState = "idle" | "copied" | "failed";
 
 export default function ContractAddress() {
-  const [copied, setCopied] = useState(false);
+  const [copyState, setCopyState] = useState<CopyState>("idle");
   const [displayedAddress, setDisplayedAddress] = useState("");
   const [isTyping, setIsTyping] = useState(true);
 
@@ -29,12 +30,25 @@ export default function ContractAddress() {
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(CONTRACT_ADDRESS);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy:", err);
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(CONTRACT_ADDRESS);
+      } else {
+        // Older browsers / non-secure contexts
+        const textarea = document.createElement("textarea");
+        textarea.value = CONTRACT_ADDRESS;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(textarea);
+        if (!ok) throw new Error("execCommand failed");
+      }
+      setCopyState("copied");
+    } catch {
+      setCopyState("failed");
     }
+    setTimeout(() => setCopyState("idle"), 2000);
   };
 
   return (
@@ -87,12 +101,17 @@ export default function ContractAddress() {
                 onClick={copyToClipboard}
                 className="relative px-8 py-4 font-mono text-sm uppercase tracking-wider transition-all"
                 style={{
-                  background: copied ? "#22c55e" : "#FF6B35",
-                  color: copied ? "white" : "black",
+                  background:
+                    copyState === "copied"
+                      ? "#22c55e"
+                      : copyState === "failed"
+                        ? "#ef4444"
+                        : "#FF6B35",
+                  color: copyState === "idle" ? "black" : "white",
                 }}
               >
                 <AnimatePresence mode="wait">
-                  {copied ? (
+                  {copyState === "copied" ? (
                     <motion.span
                       key="copied"
                       initial={{ opacity: 0, y: 10 }}
@@ -104,6 +123,19 @@ export default function ContractAddress() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       COPIED!
+                    </motion.span>
+                  ) : copyState === "failed" ? (
+                    <motion.span
+                      key="failed"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="flex items-center gap-2"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      COPY FAILED
                     </motion.span>
                   ) : (
                     <motion.span

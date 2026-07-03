@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef } from "react";
 import { staggerContainer, fadeInUp } from "@/lib/animations";
 
 const milestones = [
@@ -52,8 +51,6 @@ const milestones = [
 ];
 
 export default function Roadmap() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   return (
     <section className="section overflow-hidden">
       <div className="container-custom">
@@ -94,7 +91,6 @@ export default function Roadmap() {
 
         {/* Horizontal scrolling roadmap */}
         <div
-          ref={scrollRef}
           className="flex gap-6 overflow-x-auto scroll-snap-x pb-8 -mx-4 px-4 md:-mx-8 md:px-8"
           style={{
             scrollbarWidth: "none",
@@ -108,7 +104,7 @@ export default function Roadmap() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`flex-shrink-0 w-72 md:w-80 card-brutal p-6 scroll-snap-align-start ${
+              className={`flex-shrink-0 w-72 md:w-80 card-brutal p-6 ${
                 milestone.status === "current" ? "glow-orange" : ""
               } ${milestone.status === "upcoming" ? "opacity-60" : ""}`}
             >

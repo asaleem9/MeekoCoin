@@ -19,6 +19,13 @@ function AnimatedNumber({ value }: { value: string }) {
   useEffect(() => {
     if (isInView) {
       const numericValue = parseInt(value.replace(/[^0-9]/g, ""));
+
+      // Non-numeric values ("REVOKED") can't count up — show them as-is
+      if (isNaN(numericValue)) {
+        setDisplayValue(value);
+        return;
+      }
+
       const isPercentage = value.includes("%");
       const duration = 1500;
       const startTime = Date.now();

@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { JUPITER_SWAP_URL } from "@/lib/constants";
 
 export default function Footer() {
   const [easterEggClicks, setEasterEggClicks] = useState(0);
@@ -30,29 +31,35 @@ export default function Footer() {
         <div className="grid md:grid-cols-12 gap-12 mb-16">
           {/* Brand - takes more space */}
           <div className="md:col-span-5">
-            <h3
-              className="text-4xl md:text-5xl font-display text-white mb-4 cursor-pointer"
-              onClick={handleEasterEgg}
-            >
-              MEEKO<span className="text-meeko-orange">COIN</span>
+            <h3 className="text-4xl md:text-5xl font-display text-white mb-4">
+              <button
+                type="button"
+                onClick={handleEasterEgg}
+                className="cursor-pointer text-left"
+                aria-label="MeekoCoin"
+              >
+                MEEKO<span className="text-meeko-orange">COIN</span>
+              </button>
             </h3>
             <p className="text-gray-500 font-mono text-sm leading-relaxed max-w-xs">
               The purrfect memecoin on Solana. No utility, just vibes.
             </p>
 
             {/* Easter egg */}
-            {showEasterEgg && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="mt-4 p-4 bg-meeko-orange/10 border-l-4 border-meeko-orange"
-              >
-                <p className="font-mono text-xs text-meeko-orange">
-                  *purrs* You found me! Meeko approves.
-                </p>
-              </motion.div>
-            )}
+            <AnimatePresence>
+              {showEasterEgg && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="mt-4 p-4 bg-meeko-orange/10 border-l-4 border-meeko-orange"
+                >
+                  <p className="font-mono text-xs text-meeko-orange">
+                    *purrs* You found me! Meeko approves.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Links */}
@@ -79,7 +86,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://jup.ag"
+                  href={JUPITER_SWAP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-mono text-sm text-gray-500 hover:text-meeko-orange transition-colors"

@@ -11,7 +11,6 @@
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
   createV1,
-  mintV1,
   mplTokenMetadata,
   TokenStandard,
 } from "@metaplex-foundation/mpl-token-metadata";
@@ -20,11 +19,16 @@ import {
   generateSigner,
   keypairIdentity,
   percentAmount,
-  publicKey,
 } from "@metaplex-foundation/umi";
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
-import { readFileSync, existsSync } from "fs";
-import { TOKEN_CONFIG, KEYPAIR_PATH, getRpcUrl, NETWORK } from "./config.js";
+import { readFileSync, writeFileSync, existsSync } from "fs";
+import {
+  TOKEN_CONFIG,
+  KEYPAIR_PATH,
+  MINT_ADDRESS_PATH,
+  getRpcUrl,
+  NETWORK,
+} from "./config.js";
 
 async function main() {
   console.log("\n========================================");
@@ -32,6 +36,14 @@ async function main() {
   console.log("========================================\n");
   console.log(`Network: ${NETWORK}`);
   console.log(`RPC: ${getRpcUrl()}\n`);
+
+  // Refuse to clobber an existing deployment
+  if (existsSync(MINT_ADDRESS_PATH)) {
+    const existing = readFileSync(MINT_ADDRESS_PATH, "utf-8").trim();
+    console.error(`A token was already created: ${existing}`);
+    console.error(`Delete ${MINT_ADDRESS_PATH} first if you really want a new mint.`);
+    process.exit(1);
+  }
 
   // Load keypair
   if (!existsSync(KEYPAIR_PATH)) {
@@ -73,29 +85,29 @@ async function main() {
   }
 
   // Upload logo image
-  console.log("Uploading logo to Arweave...");
-  let imageUri: string;
-
-  if (existsSync(TOKEN_CONFIG.logoPath)) {
-    const imageBuffer = readFileSync(TOKEN_CONFIG.logoPath);
-    const [uploadedImage] = await umi.uploader.upload([
-      {
-        buffer: imageBuffer,
-        fileName: "meekocoin-logo.png",
-        displayName: "MeekoCoin Logo",
-        uniqueName: "meekocoin-logo",
-        contentType: "image/png",
-        extension: "png",
-        tags: [{ name: "Content-Type", value: "image/png" }],
-      },
-    ]);
-    imageUri = uploadedImage;
-    console.log(`Logo uploaded: ${imageUri}`);
-  } else {
-    console.log("No logo found at ./assets/meekocoin-logo.png");
-    console.log("Using placeholder...");
-    imageUri = "https://arweave.net/placeholder";
+  if (!existsSync(TOKEN_CONFIG.logoPath)) {
+    console.error(`Logo not found at: ${TOKEN_CONFIG.logoPath}`);
+    console.error("Add the logo before creating the token.");
+    process.exit(1);
   }
+
+  console.log("Uploading logo to Arweave...");
+  const imageBuffer = readFileSync(TOKEN_CONFIG.logoPath);
+  const logoFile = {
+    buffer: imageBuffer,
+    fileName: "meekocoin-logo.png",
+    displayName: "MeekoCoin Logo",
+    uniqueName: "meekocoin-logo",
+    contentType: "image/png",
+    extension: "png",
+    tags: [{ name: "Content-Type", value: "image/png" }],
+  };
+
+  const uploadPrice = await umi.uploader.getUploadPrice([logoFile]);
+  console.log(`Upload cost: ${Number(uploadPrice.basisPoints) / 1e9} ${uploadPrice.identifier}`);
+
+  const [imageUri] = await umi.uploader.upload([logoFile]);
+  console.log(`Logo uploaded: ${imageUri}`);
 
   // Upload metadata JSON
   console.log("\nUploading metadata to Arweave...");
@@ -149,13 +161,8 @@ async function main() {
   console.log("You'll need it for the next steps.\n");
 
   // Save mint address to file for other scripts
-  const fs = await import("fs");
-  fs.writeFileSync(
-    "./mint-address.txt",
-    mint.publicKey.toString(),
-    "utf-8"
-  );
-  console.log("Mint address saved to: ./mint-address.txt\n");
+  writeFileSync(MINT_ADDRESS_PATH, mint.publicKey.toString(), "utf-8");
+  console.log(`Mint address saved to: ${MINT_ADDRESS_PATH}\n`);
 }
 
 main().catch((err) => {

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { staggerContainer, fadeInUp } from "@/lib/animations";
 import BreathingButton from "./ui/BreathingButton";
+import { JUPITER_SWAP_URL } from "@/lib/constants";
 
 const steps = [
   {
@@ -127,8 +128,9 @@ export default function HowToBuy() {
             className="text-center mt-16"
           >
             <BreathingButton
-              href="https://jup.ag"
-              variant="primary"
+              href={JUPITER_SWAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               TRADE ON JUPITER
               <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

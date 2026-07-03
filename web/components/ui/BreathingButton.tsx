@@ -8,7 +8,8 @@ interface BreathingButtonProps {
   href?: string;
   onClick?: () => void;
   className?: string;
-  variant?: "primary" | "ghost";
+  target?: string;
+  rel?: string;
 }
 
 export default function BreathingButton({
@@ -16,16 +17,12 @@ export default function BreathingButton({
   href,
   onClick,
   className = "",
-  variant = "primary",
+  target,
+  rel,
 }: BreathingButtonProps) {
-  const baseStyles =
-    variant === "primary"
-      ? "btn-breathe"
-      : "btn-ghost";
-
   const content = (
     <motion.span
-      className={`inline-flex items-center gap-2 ${baseStyles} ${className}`}
+      className={`inline-flex items-center gap-2 btn-breathe ${className}`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
@@ -35,14 +32,14 @@ export default function BreathingButton({
 
   if (href) {
     return (
-      <a href={href} className="inline-block">
+      <a href={href} target={target} rel={rel} className="inline-block">
         {content}
       </a>
     );
   }
 
   return (
-    <button onClick={onClick} className="inline-block">
+    <button type="button" onClick={onClick} className="inline-block">
       {content}
     </button>
   );

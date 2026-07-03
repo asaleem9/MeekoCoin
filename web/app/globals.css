@@ -30,11 +30,6 @@ body {
   font-family: var(--font-ibm-mono), monospace;
 }
 
-/* Noise texture overlay - disabled due to iOS Safari feTurbulence issues */
-.noise-overlay {
-  display: none;
-}
-
 /* Scanline effect */
 .scanlines::after {
   content: "";
@@ -141,12 +136,6 @@ body {
 .btn-breathe:hover {
   animation-play-state: paused;
   @apply bg-meeko-gold;
-}
-
-/* Ghost button */
-.btn-ghost {
-  @apply border-2 border-meeko-orange text-meeko-orange font-bold py-4 px-8 uppercase tracking-wider;
-  @apply hover:bg-meeko-orange hover:text-black transition-all duration-300;
 }
 
 /* Section styling */

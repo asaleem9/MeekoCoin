@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, IBM_Plex_Mono } from "next/font/google";
+import { SITE_URL } from "@/lib/constants";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -15,6 +16,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "MeekoCoin | The Purrfect Memecoin on Solana",
   description:
     "MeekoCoin ($MEEKO) - A meme cryptocurrency on Solana inspired by Meeko the cat. No utility, just vibes.",
@@ -23,11 +25,21 @@ export const metadata: Metadata = {
     title: "MeekoCoin | The Purrfect Memecoin on Solana",
     description: "No utility, just vibes. Join the Meeko revolution.",
     type: "website",
+    url: SITE_URL,
+    images: [
+      {
+        url: "/meeko-logo.png",
+        width: 1024,
+        height: 1024,
+        alt: "MeekoCoin - Meeko the cat",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "MeekoCoin | The Purrfect Memecoin on Solana",
     description: "No utility, just vibes. Join the Meeko revolution.",
+    images: ["/meeko-logo.png"],
   },
 };
 
@@ -39,7 +51,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${bebasNeue.variable} ${ibmPlexMono.variable}`}>
       <body className="scanlines">
-        <div className="noise-overlay" aria-hidden="true" />
         {children}
       </body>
     </html>
