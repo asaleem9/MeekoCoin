@@ -6,7 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 MeekoCoin is a Solana SPL memecoin with a Next.js landing page. The project uses npm workspaces with two packages: `token` (Solana scripts) and `web` (Next.js site).
 
-**Live Token:** `9AqPGi9n7unEA8C6T6ujHxXsg1ywb1Ro6fitw9daMGNa` (mainnet, mint authority revoked)
+**Live Token:** `9AqPGi9n7unEA8C6T6ujHxXsg1ywb1Ro6fitw9daMGNa` (mainnet, mint and freeze authority both revoked)
+
+**Live Site:** https://meekocoin.vercel.app — note that meekocoin.com is NOT registered; the vercel.app URL is canonical (`SITE_URL` in `web/lib/constants.ts`).
 
 ## Commands
 
@@ -33,6 +35,10 @@ npm run web:build    # Production build
 npm install          # Installs both workspaces
 ```
 
+## Deployment
+
+The repo root is linked to Vercel project `meekocoin` and connected to the `asaleem9/MeekoCoin` GitHub repo: **every push to `main` auto-deploys to production.** Manual deploys: `vercel --prod` from the repo root (never from `web/`). Build settings live in root `vercel.json` (builds the `web` workspace, output `web/.next`).
+
 ## Architecture
 
 ### Token Scripts (`token/src/`)
@@ -43,15 +49,21 @@ npm install          # Installs both workspaces
 - **revoke-freeze.ts** - Permanently disables freezing wallets (uses `mpl-toolbox` setAuthority)
 - **update-metadata.ts** - Updates on-chain metadata (logo, description) without affecting supply
 
-All scripts read `NETWORK` env var (`devnet`|`mainnet`) and keypair from `~/.config/solana/id.json`.
+All scripts read the `NETWORK` env var and keypair from `~/.config/solana/id.json`. `NETWORK` must be exactly `devnet` or `mainnet` — anything else throws at startup. The scripts have safety guards: create/mint refuse to run against an existing mint, and both revoke scripts require typing `yes`.
 
 ### Web (`web/`)
 Next.js 14 App Router with Tailwind CSS and Framer Motion.
 
 Key files:
-- `components/ContractAddress.tsx` - Contains the hardcoded token mint address
+- `lib/constants.ts` - Single source of truth for `CONTRACT_ADDRESS`, `SITE_URL`, and `JUPITER_SWAP_URL` — never hardcode these in components
+- `components/LiveChart.tsx` - Queries the DexScreener API on mount; shows a "chart coming soon" fallback until a MEEKO pair is indexed, then renders the embed automatically
 - `components/Hero.tsx` - Main hero with logo from `/public/meeko-logo.png`
 - `app/globals.css` - Custom Tailwind theme (meeko-orange, meeko-gold colors)
+
+## Gotchas
+
+- `.gitignore` blanket-ignores `*.json` to protect Solana keypairs, with explicit `!` exceptions. **Any new JSON file must be added to the exception list or git will silently ignore it** (this once dropped `package-lock.json` from the repo).
+- Port 3000 is sometimes occupied by a stale dev server; `next dev` then silently picks 3001 — check the startup log for the actual port.
 
 ## Token Configuration
 
