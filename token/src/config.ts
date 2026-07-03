@@ -20,7 +20,7 @@ export const TOKEN_CONFIG = {
   totalSupplyDisplay: "420,690,000",
 
   // External links
-  website: "https://meekocoin.vercel.app",
+  website: "https://meekocoin.xyz",
   twitter: "https://twitter.com/meekocoin",
 
   // File paths

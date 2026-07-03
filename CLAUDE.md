@@ -8,7 +8,7 @@ MeekoCoin is a Solana SPL memecoin with a Next.js landing page. The project uses
 
 **Live Token:** `9AqPGi9n7unEA8C6T6ujHxXsg1ywb1Ro6fitw9daMGNa` (mainnet, mint and freeze authority both revoked)
 
-**Live Site:** https://meekocoin.vercel.app — note that meekocoin.com is NOT registered; the vercel.app URL is canonical (`SITE_URL` in `web/lib/constants.ts`).
+**Live Site:** https://meekocoin.xyz (also served at meekocoin.vercel.app). meekocoin.com is NOT registered — don't reference it. Canonical URL lives in `SITE_URL` in `web/lib/constants.ts`.
 
 ## Commands
 
