@@ -13,6 +13,7 @@
     "token:revoke": "npm run revoke --workspace=token",
     "token:revoke-freeze": "npm run revoke-freeze --workspace=token",
     "token:update": "npm run update --workspace=token",
+    "token:trigger-index": "npm run trigger-index --workspace=token",
     "web:dev": "npm run dev --workspace=web",
     "web:build": "npm run build --workspace=web"
   },

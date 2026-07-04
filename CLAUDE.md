@@ -22,6 +22,11 @@ NETWORK=devnet npm run token:revoke-freeze   # Permanently revoke freeze authori
 
 # Update metadata (logo/description)
 NETWORK=mainnet npm run token:update
+
+# Trigger DexScreener indexing: one dust swap (0.002 SOL) against the MEEKO/SOL
+# Raydium CPMM pool — DexScreener indexes a pair after its first trade.
+# Needs the deployer wallet funded with ≥0.01 SOL; prompts "yes" before spending.
+NETWORK=mainnet npm run token:trigger-index
 ```
 
 ### Web Development
