@@ -155,7 +155,7 @@ export default function Lore() {
       />
       <div
         aria-hidden
-        className="lore-watermark pointer-events-none absolute top-1/2 -translate-y-1/2 select-none whitespace-nowrap font-chaos text-[38vw] leading-none text-outline-chrome opacity-[0.07]"
+        className="lore-watermark pointer-events-none absolute top-1/2 -translate-y-1/2 select-none whitespace-nowrap font-chaos text-[38vw] leading-none text-outline-chrome opacity-[0.12]"
       >
         LORE ⛧ LORE ⛧ LORE
       </div>
