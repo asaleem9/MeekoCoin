@@ -117,7 +117,7 @@ export default function Tokenomics() {
     >
       <div
         aria-hidden
-        className="tok-watermark pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-chaos text-[45vw] leading-none text-outline-chrome opacity-[0.06]"
+        className="tok-watermark pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none font-chaos text-[45vw] leading-none text-outline-chrome opacity-[0.1]"
       >
         420
       </div>
