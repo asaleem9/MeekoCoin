@@ -19,6 +19,9 @@
   "engines": {
     "node": ">=18.17.0"
   },
+  "overrides": {
+    "@types/three": "0.170.0"
+  },
   "keywords": ["solana", "memecoin", "meeko", "cryptocurrency"],
   "license": "MIT"
 }

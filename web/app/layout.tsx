@@ -1,29 +1,35 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, IBM_Plex_Mono } from "next/font/google";
+import { Unbounded, Climate_Crisis, Azeret_Mono } from "next/font/google";
 import { SITE_URL } from "@/lib/constants";
+import Providers from "@/components/providers/Providers";
 import "./globals.css";
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
+const unbounded = Unbounded({
   subsets: ["latin"],
-  variable: "--font-bebas",
+  variable: "--font-unbounded",
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  weight: ["400", "500", "600", "700"],
+const climateCrisis = Climate_Crisis({
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-ibm-mono",
+  variable: "--font-climate",
+});
+
+const azeretMono = Azeret_Mono({
+  subsets: ["latin"],
+  variable: "--font-azeret",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "MeekoCoin | The Purrfect Memecoin on Solana",
+  title: "MeekoCoin | The Chosen Cat of Solana",
   description:
-    "MeekoCoin ($MEEKO) - A meme cryptocurrency on Solana inspired by Meeko the cat. No utility, just vibes.",
+    "MeekoCoin ($MEEKO) — the chosen cat of the Solana blockchain. 420,690,000 tokens of pure chaos. No utility, just destiny.",
   keywords: ["memecoin", "solana", "cryptocurrency", "meeko", "cat coin"],
   openGraph: {
-    title: "MeekoCoin | The Purrfect Memecoin on Solana",
-    description: "No utility, just vibes. Join the Meeko revolution.",
+    title: "MeekoCoin | The Chosen Cat of Solana",
+    description:
+      "420,690,000 tokens of pure chaos. No utility, just destiny. The prophecy is live.",
     type: "website",
     url: SITE_URL,
     images: [
@@ -37,8 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MeekoCoin | The Purrfect Memecoin on Solana",
-    description: "No utility, just vibes. Join the Meeko revolution.",
+    title: "MeekoCoin | The Chosen Cat of Solana",
+    description:
+      "420,690,000 tokens of pure chaos. No utility, just destiny. The prophecy is live.",
     images: ["/meeko-logo.png"],
   },
 };
@@ -49,9 +56,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bebasNeue.variable} ${ibmPlexMono.variable}`}>
-      <body className="scanlines">
-        {children}
+    <html
+      lang="en"
+      className={`${unbounded.variable} ${climateCrisis.variable} ${azeretMono.variable}`}
+    >
+      <body>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
