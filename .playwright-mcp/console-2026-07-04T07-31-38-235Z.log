@@ -1,0 +1,27 @@
+[    3683ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[    3758ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[    3776ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[    3824ms] [WARNING] Warning: <path> length cannot be measured when vector-effect is non-scaling-stroke and the element isn't proportionally scaled. @ webpack-internal:///(app-pages-browser)/../node_modules/gsap/DrawSVGPlugin.js:57
+[  107624ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  108002ms] [LOG] [Fast Refresh] done in 377ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  109468ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  109609ms] [LOG] [Fast Refresh] done in 141ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  111443ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  111612ms] [LOG] [Fast Refresh] done in 169ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  114230ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  114514ms] [LOG] [Fast Refresh] done in 285ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  118234ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  118612ms] [LOG] [Fast Refresh] done in 377ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  119136ms] [LOG] THREE.WebGLRenderer: Context Lost. @ webpack-internal:///(app-pages-browser)/../node_modules/three/build/three.module.js:29947

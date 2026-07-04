@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { gsap, ScrollTrigger, useGSAP, SCRAMBLE_CHARS } from "@/lib/gsap";
-import { getLenis, lockScroll, unlockScroll } from "@/lib/scroll";
+import { getLenis, lockScroll, unlockScroll, markAppReady } from "@/lib/scroll";
 
 const PHRASES = [
   "SUMMONING THE PROPHECY",
@@ -35,6 +35,7 @@ export default function Preloader() {
         if (location.hash && location.hash !== "#treats") {
           getLenis()?.scrollTo(location.hash, { immediate: true });
         }
+        markAppReady();
         window.dispatchEvent(new CustomEvent("app:ready"));
         setDone(true);
       };

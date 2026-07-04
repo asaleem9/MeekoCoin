@@ -52,18 +52,25 @@ The repo root is linked to Vercel project `meekocoin` and connected to the `asal
 All scripts read the `NETWORK` env var and keypair from `~/.config/solana/id.json`. `NETWORK` must be exactly `devnet` or `mainnet` — anything else throws at startup. The scripts have safety guards: create/mint refuse to run against an existing mint, and both revoke scripts require typing `yes`.
 
 ### Web (`web/`)
-Next.js 14 App Router with Tailwind CSS and Framer Motion.
+Next.js 14 App Router. Scroll-driven single-page experience: GSAP 3 (ScrollTrigger, SplitText, DrawSVG, Physics2D, ScrambleText — all free since 3.13) + Lenis smooth scrolling + React Three Fiber v8 / drei v9 (WebGL hero) + Remotion `<Player>` background loops + Tailwind ("acid chrome" theme: void/acid/zap/ice/chrome palette).
 
 Key files:
 - `lib/constants.ts` - Single source of truth for `CONTRACT_ADDRESS`, `SITE_URL`, and `JUPITER_SWAP_URL` — never hardcode these in components
-- `components/LiveChart.tsx` - Queries the DexScreener API on mount; shows a "chart coming soon" fallback until a MEEKO pair is indexed, then renders the embed automatically
-- `components/Hero.tsx` - Main hero with logo from `/public/meeko-logo.png`
-- `app/globals.css` - Custom Tailwind theme (meeko-orange, meeko-gold colors)
+- `lib/gsap.ts` - The ONLY place `gsap.registerPlugin` runs; every component imports gsap from here. Also holds `SECTION_PRIORITY` (descending `refreshPriority` per section — required because dynamic imports make ScrollTrigger creation order nondeterministic)
+- `lib/scroll.ts` - Module-level Lenis handle (`getLenis`/`lockScroll`/`unlockScroll`) + `isAppReady` one-shot state. Entrance animations gated on the `app:ready` event MUST check `isAppReady()` first — if their `useGSAP` rebuilds after the preloader finished, the event never re-fires and paused `from()` tweens leave elements invisible (`immediateRender` applies hidden start-states even when paused)
+- `components/providers/MotionProvider.tsx` - Motion tiers: `full` (everything) / `lite` (coarse pointer, small screens, weak devices: no pins, no WebGL) / `off` (prefers-reduced-motion: static page, native scroll). Every section reads the tier and adapts
+- `components/providers/SmoothScroll.tsx` - Lenis in window mode only (wrapper/transform mode breaks pins and fixed overlays); `anchors: true` handles `#contract`/`#how-to-buy`
+- `components/sections/` - The 8 page acts; each owns its ScrollTriggers via `useGSAP({ scope, dependencies: [tier], revertOnUpdate: true })`
+- `components/sections/LiveChart.tsx` - Queries the DexScreener API on mount; shows a "charts awaken soon" fallback until a MEEKO pair is indexed, then renders the embed automatically. Never wrap the iframe in animated transforms
+- `components/eggs/EggLayer.tsx` + `lib/eggs.ts` - Hidden easter eggs (Konami DEGEN MODE, typing "meow", 60s idle sleep, dizzy coin, 42%/69% scroll "nice.", roadmap grass hover, console ASCII, 4:20 sticker, footer 5-click, `#treats` hash)
+- CSS gradient text (`.text-holo`/`.text-chrome`) must be applied to SplitText **chars** (via `charClassName` on `SplitHeading`), not the parent — background-clip dies against the mask wrappers
 
 ## Gotchas
 
 - `.gitignore` blanket-ignores `*.json` to protect Solana keypairs, with explicit `!` exceptions. **Any new JSON file must be added to the exception list or git will silently ignore it** (this once dropped `package-lock.json` from the repo).
 - Port 3000 is sometimes occupied by a stale dev server; `next dev` then silently picks 3001 — check the startup log for the actual port.
+- **`three` is pinned exactly at `0.170.0`** (web deps + root `overrides`). drei 9.x bundles `three-mesh-bvh ^0.7`, which breaks at runtime with three ≥ 0.172. Never bump three without also moving off drei v9 (which itself requires React 19 / fiber v9). The root `overrides` entry exists because drei's deps (`maath`, `stats-gl`) otherwise pull in a second, newer `@types/three` that breaks type-checking.
+- No CSS `scroll-behavior: smooth` anywhere — it double-eases against Lenis. Same reason `<main>` uses `overflow-x-clip`, not `overflow-x-hidden`.
 
 ## Token Configuration
 

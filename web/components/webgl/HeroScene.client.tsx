@@ -24,6 +24,9 @@ function MeekoCoin({ exitRef }: SceneProps) {
   const clicks = useRef<number[]>([]);
   const logo = useTexture("/meeko-logo.png");
   logo.colorSpace = THREE.SRGBColorSpace;
+  // Cylinder cap UVs start at +X; counter-rotate so the cat sits upright.
+  logo.center.set(0.5, 0.5);
+  logo.rotation = -Math.PI / 2;
 
   useEffect(() => {
     // Easter-egg hooks: DEGEN MODE hyperspin, idle sleep slowdown.
@@ -88,7 +91,7 @@ function MeekoCoin({ exitRef }: SceneProps) {
     <Float speed={2.2} rotationIntensity={0.25} floatIntensity={0.7}>
       <group ref={group} onClick={onCoinClick}>
         <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
-          <cylinderGeometry args={[1.7, 1.7, 0.22, 72]} />
+          <cylinderGeometry args={[1.1, 1.1, 0.15, 72]} />
           {/* rim */}
           <meshStandardMaterial
             attach="material-0"
@@ -114,7 +117,7 @@ function MeekoCoin({ exitRef }: SceneProps) {
         </mesh>
         {/* thin holo ring floating around the coin */}
         <mesh rotation={[Math.PI / 2.4, 0.3, 0]}>
-          <torusGeometry args={[2.4, 0.02, 12, 96]} />
+          <torusGeometry args={[1.65, 0.015, 12, 96]} />
           <meshStandardMaterial
             metalness={1}
             roughness={0.1}
@@ -129,8 +132,10 @@ function MeekoCoin({ exitRef }: SceneProps) {
 }
 
 function Nebula() {
+  // Far enough back that its front surface (z = -14 + 6 = -8) never
+  // swallows the coin at the origin.
   return (
-    <mesh position={[0, 0, -6]} scale={7}>
+    <mesh position={[0, 0, -14]} scale={6}>
       <sphereGeometry args={[1, 48, 48]} />
       <MeshDistortMaterial
         color="#150A2E"

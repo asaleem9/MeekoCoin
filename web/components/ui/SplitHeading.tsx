@@ -2,6 +2,7 @@
 
 import { useRef, type ElementType, type ReactNode } from "react";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
+import { isAppReady } from "@/lib/scroll";
 import { useMotionTier } from "@/components/providers/MotionProvider";
 
 type SplitHeadingProps = {
@@ -14,6 +15,12 @@ type SplitHeadingProps = {
   /** Delay reveal until the app:ready event instead of a ScrollTrigger */
   waitForReady?: boolean;
   refreshPriority?: number;
+  /**
+   * Class applied to every char span. Needed for background-clip gradients
+   * (text-holo/text-chrome), which must live on the chars themselves —
+   * on the parent they clip against the mask wrappers and vanish.
+   */
+  charClassName?: string;
 };
 
 // Masked SplitText reveal: chars rise out of an overflow clip when the
@@ -26,6 +33,7 @@ export default function SplitHeading({
   stagger = 0.018,
   waitForReady = false,
   refreshPriority,
+  charClassName,
 }: SplitHeadingProps) {
   const tier = useMotionTier();
   const ref = useRef<HTMLElement>(null);
@@ -50,6 +58,7 @@ export default function SplitHeading({
         type,
         mask: type,
         autoSplit: true,
+        charsClass: charClassName,
         onSplit: (self) => {
           const targets =
             type === "chars" ? self.chars : type === "words" ? self.words : self.lines;
@@ -70,8 +79,11 @@ export default function SplitHeading({
                 },
           });
           if (waitForReady) {
-            const onReady = () => tween.play();
-            window.addEventListener("app:ready", onReady, { once: true });
+            if (isAppReady()) tween.progress(1);
+            else {
+              const onReady = () => tween.play();
+              window.addEventListener("app:ready", onReady, { once: true });
+            }
           }
           return tween;
         },

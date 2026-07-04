@@ -26,3 +26,16 @@ export function unlockScroll() {
   lenis?.start();
   document.documentElement.classList.remove("scroll-locked");
 }
+
+// One-shot app:ready state. Entrance animations that wait for the preloader
+// must check this before subscribing — if they rebuild after the event fired
+// (motion-tier change, HMR), the event never comes again.
+let appReady = false;
+
+export function markAppReady() {
+  appReady = true;
+}
+
+export function isAppReady() {
+  return appReady;
+}

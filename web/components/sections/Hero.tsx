@@ -4,6 +4,7 @@ import { useRef } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { gsap, useGSAP, SECTION_PRIORITY } from "@/lib/gsap";
+import { isAppReady } from "@/lib/scroll";
 import { JUPITER_SWAP_URL } from "@/lib/constants";
 import { useMotionTier } from "@/components/providers/MotionProvider";
 import SplitHeading from "@/components/ui/SplitHeading";
@@ -55,7 +56,8 @@ export default function Hero() {
         .from(".hero-scrollhint", { autoAlpha: 0, duration: 0.6 }, "-=0.2");
 
       const onReady = () => entrance.play();
-      window.addEventListener("app:ready", onReady, { once: true });
+      if (isAppReady()) entrance.progress(1); // rebuilt after reveal: settle instantly
+      else window.addEventListener("app:ready", onReady, { once: true });
 
       // Exit scrub: content splits apart as the hero scrolls away; the WebGL
       // coin reads exitRef every frame.
@@ -119,16 +121,6 @@ export default function Hero() {
                 "radial-gradient(60% 50% at 50% 40%, rgba(255,61,174,0.18), transparent 70%), radial-gradient(50% 40% at 30% 70%, rgba(77,243,255,0.12), transparent 70%), radial-gradient(50% 40% at 70% 30%, rgba(200,255,0,0.1), transparent 70%)",
             }}
           />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-90">
-            <Image
-              src="/meeko-logo.png"
-              alt=""
-              width={280}
-              height={280}
-              className="rounded-full"
-              priority
-            />
-          </div>
         </div>
       )}
 
@@ -154,13 +146,25 @@ export default function Hero() {
           ⛧ the prophecy is live — solana mainnet ⛧
         </p>
 
+        {tier !== "full" && (
+          <Image
+            src="/meeko-logo.png"
+            alt="Meeko the cat"
+            width={200}
+            height={200}
+            className="h-36 w-36 rounded-full md:h-48 md:w-48"
+            priority
+          />
+        )}
+
         <div className="hero-title-wrap">
           <SplitHeading
             as="h1"
             waitForReady
             type="chars"
             stagger={0.06}
-            className="font-chaos text-holo text-[clamp(4.5rem,18vw,15rem)] leading-[0.9]"
+            charClassName="text-holo"
+            className="whitespace-nowrap font-chaos text-[clamp(4rem,15vw,13rem)] leading-[0.9]"
           >
             MEEKO
           </SplitHeading>
@@ -170,7 +174,7 @@ export default function Hero() {
           <h2 className="hero-sub font-display text-xl font-extrabold uppercase tracking-[0.3em] text-chrome-light sm:text-2xl md:text-3xl">
             Smol. Fierce. <span className="text-chrome">Inevitable.</span>
           </h2>
-          <p className="hero-tag max-w-md font-mono text-sm leading-relaxed text-chrome-mid">
+          <p className="hero-tag max-w-md font-mono text-sm leading-relaxed text-chrome-light">
             420,690,000 tokens of pure chaos. Zero utility. Infinite destiny.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">

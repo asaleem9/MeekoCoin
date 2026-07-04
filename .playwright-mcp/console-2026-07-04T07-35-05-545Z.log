@@ -1,0 +1,84 @@
+[     304ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[     377ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[     388ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[     428ms] [WARNING] Warning: <path> length cannot be measured when vector-effect is non-scaling-stroke and the element isn't proportionally scaled. @ webpack-internal:///(app-pages-browser)/../node_modules/gsap/DrawSVGPlugin.js:57
+[   43048ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[   43316ms] [LOG] [Fast Refresh] done in 269ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[   43870ms] [LOG] THREE.WebGLRenderer: Context Lost. @ webpack-internal:///(app-pages-browser)/../node_modules/three/build/three.module.js:29947
+[  518117ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  518461ms] [LOG] [Fast Refresh] done in 344ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  520160ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  520329ms] [LOG] [Fast Refresh] done in 169ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  522391ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  522515ms] [LOG] [Fast Refresh] done in 124ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  524806ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  524982ms] [LOG] [Fast Refresh] done in 175ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  527130ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  527254ms] [LOG] [Fast Refresh] done in 123ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  529024ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  529140ms] [LOG] [Fast Refresh] done in 115ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  531168ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  531236ms] [LOG] [Fast Refresh] done in 68ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  547864ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  547933ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[  547943ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[  547974ms] [WARNING] Warning: <path> length cannot be measured when vector-effect is non-scaling-stroke and the element isn't proportionally scaled. @ webpack-internal:///(app-pages-browser)/../node_modules/gsap/DrawSVGPlugin.js:57
+[  600443ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  600516ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[  600526ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[  605755ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  605797ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[  605809ms] [LOG] %c
+      /\_/\
+     ( o.o )   MEEKO SEES YOU.
+      > ^ <
+   You found the litter box.
+   The prophecy is real.
+ color:#C8FF00;font-family:monospace;font-size:12px;font-weight:bold; @ webpack-internal:///(app-pages-browser)/./components/eggs/EggLayer.tsx:25
+[  608357ms] [WARNING] Warning: <path> length cannot be measured when vector-effect is non-scaling-stroke and the element isn't proportionally scaled. @ webpack-internal:///(app-pages-browser)/../node_modules/gsap/DrawSVGPlugin.js:57
+[  644194ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  644299ms] [LOG] [Fast Refresh] done in 104ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  647321ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  647436ms] [LOG] [Fast Refresh] done in 114ms @ webpack-internal:///(app-pages-browser)/../node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
