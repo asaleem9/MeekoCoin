@@ -24,9 +24,10 @@ function MeekoCoin({ exitRef }: SceneProps) {
   const clicks = useRef<number[]>([]);
   const logo = useTexture("/meeko-logo.png");
   logo.colorSpace = THREE.SRGBColorSpace;
-  // Cylinder cap UVs start at +X; counter-rotate so the cat sits upright.
+  // Counter-rotate the cap UVs so the cat sits upright on both faces
+  // (verified in-browser; the back reads mirrored, like a real coin).
   logo.center.set(0.5, 0.5);
-  logo.rotation = -Math.PI / 2;
+  logo.rotation = Math.PI / 2;
 
   useEffect(() => {
     // Easter-egg hooks: DEGEN MODE hyperspin, idle sleep slowdown.
