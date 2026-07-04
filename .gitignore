@@ -47,3 +47,6 @@ token/mint-address.txt
 
 # Claude configuration
 .claude/
+
+# Playwright MCP browser-test artifacts
+.playwright-mcp/
