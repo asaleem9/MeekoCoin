@@ -50,3 +50,8 @@ token/mint-address.txt
 
 # Playwright MCP browser-test artifacts
 .playwright-mcp/
+
+# Claude Code files: local only, never published
+CLAUDE.md
+CLAUDE.local.md
+.claude/
